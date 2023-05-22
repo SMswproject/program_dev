@@ -16,6 +16,12 @@
 <![endif]-->
 </head>
 
+
+<!--実験-->
+
+
+
+
 <body>
 
 <div id="container">
@@ -39,6 +45,98 @@
 <section>
 
 <h2>EXECUTION<br><span>실행</span></h2>
+
+
+
+<!--===================================================-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      .container {
+        margin: 50px;
+      }
+      #imagePreview {
+        max-width: 100%;
+        max-height: 300px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+  <div class="container">
+  
+  <form onsubmit="submitForm(event)" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="inputText">Input text</label>
+      <input type="text" class="form-control" id="inputText" placeholder="Input text">
+    </div>
+    <div class="form-group">
+      <label for="inputFile">File input</label>
+      <div class="input-group">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputFile">
+          <label class="custom-file-label" for="inputFile" data-browse="参照">ファイルを選択(ここにドロップすることもできます)</label>
+        </div>
+        <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary input-group-text" id="inputFileReset">取消</button>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div id="dataList"></div>
+    <hr/>
+    <div id="imagePreview"></div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+  <script>
+    bsCustomFileInput.init();
+  
+    document.getElementById('inputFileReset').addEventListener('click', function() {
+      bsCustomFileInput.destroy();
+      var elem = document.getElementById('inputFile');
+      elem.value = '';
+      var clone = elem.cloneNode(false);
+      elem.parentNode.replaceChild(clone, elem);
+      bsCustomFileInput.init();
+      document.getElementById('imagePreview').innerHTML = '';
+    });
+  
+    function submitForm(event) {
+      event.preventDefault(); // フォームのデフォルトの送信動作をキャンセルする
+  
+      var formData = new FormData(); // フォームデータを作成
+  
+      // テキスト入力の値を取得してフォームデータに追加
+      var inputText = document.getElementById('inputText').value;
+      formData.append('text', inputText);
+  
+      // 選択されたファイルを取得してフォームデータに追加
+      var inputFile = document.getElementById('inputFile').files[0];
+      formData.append('file', inputFile);
+  
+      // フォームデータをサーバーに送信する処理を実装する（サーバーサイドの処理に依存）
+  
+      // 保存されたデータをリスト形式で表示する処理
+      var dataList = document.getElementById('dataList');
+      var listItem = document.createElement('li');
+      listItem.textContent = 'Text: ' + inputText + ', File: ' + inputFile.name;
+      dataList.appendChild(listItem);
+  
+      // 画像を枠内に表示する処理
+      var imagePreview = document.getElementById('imagePreview');
+      var img = document.createElement('img');
+      img.src = URL.createObjectURL(inputFile);
+      img.classList.add('img-fluid');
+      imagePreview.innerHTML = ''; // 以前のプレビューを削除
+      imagePreview.appendChild(img);
+    }
+  </script>
 
 
 
