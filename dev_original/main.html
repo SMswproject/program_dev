@@ -20,15 +20,8 @@
 <body class="home">
 
 
-<!--React가 시작하지 않은 경우의 메시지--->
-    <div class="container">
-        <div id="display" class="text-center">
-            <p>잠깐만요</p>
-        </div>
-    </div>
-<!--script태그를 추가, 두 태그는 React 를 불러온다-->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+
 
 <div id="container">
 
@@ -145,17 +138,6 @@ open_close("menubar_hdr", "menubar");
 <!--lightbox용js파일 가져오기-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox-plus-jquery.min.js"></script>
 
-
-
-
-<!--React-DOM-->
-<script>
-    let dom = document.getElementById('display');
-    let el = React.createElement(
-        'p', {}, 'React시작'
-    )
-    ReactDOM.render(el, dom);
-    </script>
 
 
 </body>
